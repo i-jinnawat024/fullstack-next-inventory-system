@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
 
     // Verify password
     const isValidPassword = comparePassword(password, user.password);
+    console.log(isValidPassword)
     if (!isValidPassword) {
       return NextResponse.json<ApiResponse>({
         success: false,

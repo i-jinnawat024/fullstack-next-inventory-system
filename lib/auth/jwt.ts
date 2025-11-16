@@ -1,4 +1,5 @@
 import { JWTPayload, AuthUser } from '@/lib/types';
+import { NextRequest } from 'next/server';
 
 // JWT simulation for development - in production, use a proper JWT library
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-key-change-in-production';
@@ -96,5 +97,35 @@ export function hashPassword(password: string): string {
 export function comparePassword(password: string, hash: string): boolean {
   // This is a simple simulation - in production, use bcrypt.compare
   const expectedHash = hashPassword(password);
+  console.log(expectedHash);
   return expectedHash === hash;
+}
+
+// Verify authentication from request
+export async function verifyAuth(request: NextRequest): Promise<{ valid: boolean; user?: AuthUser; error?: string }> {
+  try {
+    const cookieHeader = request.cookies.get('auth-token')?.value;
+    
+    if (!cookieHeader) {
+      return { valid: false, error: 'No authentication token' };
+    }
+
+    const payload = verifyToken(cookieHeader);
+    
+    if (!payload) {
+      return { valid: false, error: 'Invalid or expired token' };
+    }
+
+    const user: AuthUser = {
+      id: payload.userId,
+      email: payload.email,
+      name: '', // Name not stored in token
+      role: payload.role,
+      department: '', // Department not stored in token
+    };
+
+    return { valid: true, user };
+  } catch (error) {
+    return { valid: false, error: 'Authentication failed' };
+  }
 }
