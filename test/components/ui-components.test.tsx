@@ -31,7 +31,7 @@ describe('UI Components', () => {
 
       rerender(<Button variant="secondary">Secondary</Button>);
       button = screen.getByRole('button');
-      expect(button).toHaveStyle({ backgroundColor: 'var(--color-bg-secondary)' });
+      expect(button).toHaveStyle({ backgroundColor: 'var(--color-surface)' });
     });
   });
 

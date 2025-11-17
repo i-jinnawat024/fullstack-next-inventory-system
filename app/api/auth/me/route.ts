@@ -1,30 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { mockDb } from '@/lib/database/mock-database';
 import { ApiResponse, AuthUser } from '@/lib/types';
+import { verifyAuth } from '@/lib/auth/jwt';
 
 export async function GET(request: NextRequest) {
   try {
-    // Get user ID from middleware headers
-    const userId = request.headers.get('x-user-id');
+    const authResult = await verifyAuth(request);
     
-    if (!userId) {
+    if (!authResult.valid || !authResult.user) {
       return NextResponse.json<ApiResponse>({
         success: false,
         error: {
           code: 'UNAUTHORIZED',
-          message: 'ไม่พบข้อมูลผู้ใช้'
+          message: 'กรุณาเข้าสู่ระบบ'
         }
       }, { status: 401 });
     }
 
     // Get user from database
-    const user = await mockDb.findUserById(userId);
+    const user = await mockDb.findUserById(authResult.user.id);
     if (!user || !user.isActive) {
       return NextResponse.json<ApiResponse>({
         success: false,
         error: {
           code: 'USER_NOT_FOUND',
-          message: 'ไม่พบข้อมูลผู้ใช้'
+          message: 'ไม่พบผู้ใช้หรือบัญชีถูกปิดใช้งาน'
         }
       }, { status: 404 });
     }
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
-        message: 'เกิดข้อผิดพลาดภายในระบบ'
+          message: 'เกิดข้อผิดพลาดภายในระบบ'
       }
     }, { status: 500 });
   }

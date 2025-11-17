@@ -3,31 +3,38 @@
 import { useTheme } from './theme-provider';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 
+/**
+ * Theme Toggle Button Component
+ * Provides a floating button to switch between light and dark themes
+ * Requirements: 11.2 (theme toggle button with icon)
+ */
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+      className="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2"
       style={{
         backgroundColor: 'var(--color-surface)',
         borderColor: 'var(--color-border)',
         color: 'var(--color-text)',
         boxShadow: 'var(--shadow-lg)',
-        border: '1px solid var(--color-border)'
+        border: '1px solid var(--color-border)',
+        transition: 'all var(--transition-normal)', // Smooth transitions (Requirement 11.4)
       }}
       title={theme === 'light' ? THAI_LABELS.switchToDark : THAI_LABELS.switchToLight}
       aria-label={theme === 'light' ? THAI_LABELS.switchToDark : THAI_LABELS.switchToLight}
     >
       {theme === 'light' ? (
-        // Moon icon for dark mode
+        // Moon icon for switching to dark mode
         <svg
           className="w-6 h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          style={{ transition: 'transform var(--transition-fast)' }}
         >
           <path
             strokeLinecap="round"
@@ -37,13 +44,14 @@ export function ThemeToggle() {
           />
         </svg>
       ) : (
-        // Sun icon for light mode
+        // Sun icon for switching to light mode
         <svg
           className="w-6 h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          style={{ transition: 'transform var(--transition-fast)' }}
         >
           <path
             strokeLinecap="round"

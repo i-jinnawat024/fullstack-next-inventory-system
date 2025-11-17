@@ -5,6 +5,7 @@ import { Requisition, InventoryItem, User } from '@/lib/types';
 import { Table, Column } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
+import { StatusBadge, StatusType } from '@/components/ui/status-badge';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 import { formatDate } from '@/lib/utils/format';
 import jsPDF from 'jspdf';
@@ -78,16 +79,16 @@ export default function RequisitionHistoryPage() {
     fetchRequisitions();
   }, [statusFilter]);
 
-  // Get status display
-  const getStatusDisplay = (status: Requisition['status']) => {
+  // Get status label for PDF export
+  const getStatusLabel = (status: Requisition['status']) => {
     const statusMap = {
-      draft: { text: THAI_LABELS.draft, color: 'var(--color-text-secondary)' },
-      pending: { text: THAI_LABELS.pending, color: 'var(--color-warning)' },
-      approved: { text: THAI_LABELS.approved, color: 'var(--color-success)' },
-      rejected: { text: THAI_LABELS.rejected, color: 'var(--color-error)' },
-      issued: { text: THAI_LABELS.issued, color: 'var(--color-primary)' }
+      draft: THAI_LABELS.draft,
+      pending: THAI_LABELS.pending,
+      approved: THAI_LABELS.approved,
+      rejected: THAI_LABELS.rejected,
+      issued: THAI_LABELS.issued
     };
-    return statusMap[status] || { text: status, color: 'var(--color-text)' };
+    return statusMap[status] || status;
   };
 
 
@@ -109,7 +110,7 @@ export default function RequisitionHistoryPage() {
     doc.setFontSize(12);
     doc.text(`เลขที่เอกสาร: ${requisition.documentNumber}`, 20, 35);
     doc.text(`วันที่สร้าง: ${formatDate(requisition.createdAt)}`, 20, 45);
-    doc.text(`สถานะ: ${getStatusDisplay(requisition.status).text}`, 20, 55);
+    doc.text(`สถานะ: ${getStatusLabel(requisition.status)}`, 20, 55);
     
     if (requisition.notes) {
       doc.text(`หมายเหตุ: ${requisition.notes}`, 20, 65);
@@ -171,20 +172,7 @@ export default function RequisitionHistoryPage() {
       header: THAI_LABELS.status,
       width: '120px',
       align: 'center',
-      render: (req) => {
-        const status = getStatusDisplay(req.status);
-        return (
-          <span
-            className="px-2 py-1 rounded-full text-xs font-medium"
-            style={{
-              backgroundColor: `${status.color}20`,
-              color: status.color,
-            }}
-          >
-            {status.text}
-          </span>
-        );
-      },
+      render: (req) => <StatusBadge status={req.status as StatusType} size="sm" />,
     },
     {
       key: 'items',
@@ -320,15 +308,7 @@ export default function RequisitionHistoryPage() {
                   {THAI_LABELS.status}
                 </label>
                 <div>
-                  <span
-                    className="px-2 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      backgroundColor: `${getStatusDisplay(selectedRequisition.status).color}20`,
-                      color: getStatusDisplay(selectedRequisition.status).color,
-                    }}
-                  >
-                    {getStatusDisplay(selectedRequisition.status).text}
-                  </span>
+                  <StatusBadge status={selectedRequisition.status as StatusType} size="sm" />
                 </div>
               </div>
               <div>

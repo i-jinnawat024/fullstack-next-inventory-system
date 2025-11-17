@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const authResult = await verifyAuth(request);
     if (!authResult.valid) {
       return NextResponse.json(
-        { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
+        { success: false, error: { code: 'UNAUTHORIZED', message: 'กรุณาเข้าสู่ระบบ' } },
         { status: 401 }
       );
     }
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
         success: false, 
         error: { 
           code: 'INTERNAL_ERROR', 
-          message: 'Failed to fetch inventory items' 
+          message: 'ไม่สามารถโหลดข้อมูลสินค้าได้' 
         } 
       },
       { status: 500 }
@@ -51,14 +51,14 @@ export async function POST(request: NextRequest) {
     const authResult = await verifyAuth(request);
     if (!authResult.valid) {
       return NextResponse.json(
-        { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
+        { success: false, error: { code: 'UNAUTHORIZED', message: 'กรุณาเข้าสู่ระบบ' } },
         { status: 401 }
       );
     }
 
     if (authResult.user?.role !== 'admin') {
       return NextResponse.json(
-        { success: false, error: { code: 'FORBIDDEN', message: 'Admin access required' } },
+        { success: false, error: { code: 'FORBIDDEN', message: 'ต้องมีสิทธิ์ผู้ดูแลระบบ' } },
         { status: 403 }
       );
     }
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
           success: false, 
           error: { 
             code: 'VALIDATION_ERROR', 
-            message: 'Missing required fields',
+            message: 'กรุณากรอกข้อมูลให้ครบถ้วน',
             details: { missingFields }
           } 
         },
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
           success: false, 
           error: { 
             code: 'DUPLICATE_CODE', 
-            message: 'Product code already exists' 
+            message: 'รหัสสินค้านี้มีอยู่ในระบบแล้ว' 
           } 
         },
         { status: 400 }
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
         success: false, 
         error: { 
           code: 'INTERNAL_ERROR', 
-          message: 'Failed to create inventory item' 
+          message: 'ไม่สามารถสร้างสินค้าได้' 
         } 
       },
       { status: 500 }

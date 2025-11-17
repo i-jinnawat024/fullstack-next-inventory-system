@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Requisition, InventoryItem, User } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
+import { StatusBadge, StatusType } from '@/components/ui/status-badge';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 import { formatDate } from '@/lib/utils/format';
 
@@ -84,26 +85,6 @@ function RequisitionDetailModal({
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'pending': return '#f59e0b';
-      case 'approved': return '#10b981';
-      case 'rejected': return '#ef4444';
-      case 'issued': return '#6366f1';
-      default: return '#6b7280';
-    }
-  };
-
-  const getStatusLabel = (status: string) => {
-    switch (status) {
-      case 'pending': return THAI_LABELS.pending;
-      case 'approved': return THAI_LABELS.approved;
-      case 'rejected': return THAI_LABELS.rejected;
-      case 'issued': return THAI_LABELS.issued;
-      default: return status;
-    }
-  };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="รายละเอียดคำขอเบิกสินค้า" size="lg">
       <div className="p-6 space-y-6">
@@ -121,15 +102,7 @@ function RequisitionDetailModal({
             <label className="block text-sm font-medium mb-1" style={{ color: 'var(--color-text-secondary)' }}>
               {THAI_LABELS.status}
             </label>
-            <span
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-              style={{
-                backgroundColor: `${getStatusColor(requisition.status)}20`,
-                color: getStatusColor(requisition.status)
-              }}
-            >
-              {getStatusLabel(requisition.status)}
-            </span>
+            <StatusBadge status={requisition.status as StatusType} size="sm" />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1" style={{ color: 'var(--color-text-secondary)' }}>
@@ -333,26 +306,6 @@ export function ApprovalQueueTable({
     setIsDetailModalOpen(true);
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'pending': return '#f59e0b';
-      case 'approved': return '#10b981';
-      case 'rejected': return '#ef4444';
-      case 'issued': return '#6366f1';
-      default: return '#6b7280';
-    }
-  };
-
-  const getStatusLabel = (status: string) => {
-    switch (status) {
-      case 'pending': return THAI_LABELS.pending;
-      case 'approved': return THAI_LABELS.approved;
-      case 'rejected': return THAI_LABELS.rejected;
-      case 'issued': return THAI_LABELS.issued;
-      default: return status;
-    }
-  };
-
   const selectedUser = selectedRequisition 
     ? users.find(user => user.id === selectedRequisition.userId) || null
     : null;
@@ -432,22 +385,14 @@ export function ApprovalQueueTable({
                     {formatDate(requisition.createdAt)}
                   </td>
                   <td className="py-3 px-4 text-center">
-                    <span
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                      style={{
-                        backgroundColor: `${getStatusColor(requisition.status)}20`,
-                        color: getStatusColor(requisition.status)
-                      }}
-                    >
-                      {getStatusLabel(requisition.status)}
-                    </span>
+                    <StatusBadge status={requisition.status as StatusType} size="sm" />
                   </td>
                   <td className="py-3 px-4 text-center" style={{ color: 'var(--color-text)' }}>
                     {requisition.items.length}
                   </td>
                   <td className="py-3 px-4 text-center">
                     <Button
-                      variant="outline"
+                      variant="secondary"
                       size="sm"
                       onClick={() => handleViewDetails(requisition)}
                     >

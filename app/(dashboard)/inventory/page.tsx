@@ -5,6 +5,8 @@ import { InventoryItem, Notice } from '@/lib/types';
 import { Table, Column } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { StatusBadge } from '@/components/ui/status-badge';
+import { StatCard } from '@/components/dashboard/stat-card';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 import { formatDate } from '@/lib/utils/format';
 
@@ -107,14 +109,44 @@ export default function InventoryPage() {
     });
   };
 
-  // Get stock status display
-  const getStockStatus = (item: InventoryItem) => {
+  // Get stock status for badge
+  const getStockStatusBadge = (item: InventoryItem) => {
     if (item.currentStock === 0) {
-      return { text: THAI_LABELS.outOfStock, color: 'var(--color-error)' };
+      return (
+        <StatusBadge 
+          status="rejected" 
+          size="sm"
+          icon={
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          }
+        />
+      );
     } else if (item.currentStock <= item.minimumStock) {
-      return { text: THAI_LABELS.lowStock, color: 'var(--color-warning)' };
+      return (
+        <StatusBadge 
+          status="pending" 
+          size="sm"
+          icon={
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          }
+        />
+      );
     } else {
-      return { text: THAI_LABELS.inStock, color: 'var(--color-success)' };
+      return (
+        <StatusBadge 
+          status="approved" 
+          size="sm"
+          icon={
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          }
+        />
+      );
     }
   };
 
@@ -183,19 +215,14 @@ export default function InventoryPage() {
     {
       key: 'currentStock',
       header: THAI_LABELS.remaining,
-      width: '100px',
+      width: '150px',
       align: 'right',
-      render: (item) => {
-        const status = getStockStatus(item);
-        return (
-          <div className="text-right">
-            <div className="font-semibold">{item.currentStock.toLocaleString()}</div>
-            <div className="text-xs" style={{ color: status.color }}>
-              {status.text}
-            </div>
-          </div>
-        );
-      },
+      render: (item) => (
+        <div className="flex flex-col items-end gap-2">
+          <div className="font-semibold">{item.currentStock.toLocaleString()}</div>
+          {getStockStatusBadge(item)}
+        </div>
+      ),
     },
   ];
 
@@ -292,7 +319,7 @@ export default function InventoryPage() {
           </div>
         </div>
         <div className="flex justify-end mt-4">
-          <Button variant="outline" size="sm" onClick={clearFilters}>
+          <Button variant="secondary" size="sm" onClick={clearFilters}>
             {THAI_LABELS.clear}
           </Button>
         </div>
@@ -316,47 +343,47 @@ export default function InventoryPage() {
 
       {/* Summary */}
       {!loading && inventory.length > 0 && (
-        <div
-          className="p-4 rounded-lg border"
-          style={{
-            backgroundColor: 'var(--color-bg-secondary)',
-            borderColor: 'var(--color-border)',
-          }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-text)' }}>
-                {inventory.length}
-              </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                {THAI_LABELS.totalItems}
-              </div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-success)' }}>
-                {inventory.filter(item => item.currentStock > item.minimumStock).length}
-              </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                {THAI_LABELS.inStock}
-              </div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-warning)' }}>
-                {inventory.filter(item => item.currentStock <= item.minimumStock && item.currentStock > 0).length}
-              </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                {THAI_LABELS.lowStock}
-              </div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-error)' }}>
-                {inventory.filter(item => item.currentStock === 0).length}
-              </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                {THAI_LABELS.outOfStock}
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <StatCard
+            title={THAI_LABELS.totalItems}
+            value={inventory.length}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+            }
+            color="var(--color-primary)"
+          />
+          <StatCard
+            title={THAI_LABELS.inStock}
+            value={inventory.filter(item => item.currentStock > item.minimumStock).length}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            }
+            color="var(--color-success)"
+          />
+          <StatCard
+            title={THAI_LABELS.lowStock}
+            value={inventory.filter(item => item.currentStock <= item.minimumStock && item.currentStock > 0).length}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            }
+            color="var(--color-warning)"
+          />
+          <StatCard
+            title={THAI_LABELS.outOfStock}
+            value={inventory.filter(item => item.currentStock === 0).length}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            }
+            color="var(--color-error)"
+          />
         </div>
       )}
     </div>

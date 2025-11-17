@@ -109,6 +109,12 @@ export const THAI_LABELS = {
   forbidden: 'ไม่อนุญาตให้เข้าถึง',
   notFound: 'ไม่พบข้อมูล',
   internalError: 'เกิดข้อผิดพลาดภายในระบบ',
+  invalidNumber: 'กรุณากรอกตัวเลขที่ถูกต้อง',
+  numberTooSmall: 'ค่าต้องมากกว่าหรือเท่ากับ',
+  numberTooLarge: 'ค่าต้องน้อยกว่าหรือเท่ากับ',
+  invalidFileType: 'ประเภทไฟล์ไม่ถูกต้อง',
+  fileTooLarge: 'ขนาดไฟล์ใหญ่เกินไป',
+  maxFileSize: 'ขนาดไฟล์สูงสุด',
   
   // Theme
   lightTheme: 'โหมดสว่าง',
@@ -116,6 +122,13 @@ export const THAI_LABELS = {
   toggleTheme: 'เปลี่ยนธีม',
   switchToLight: 'เปลี่ยนเป็นโหมดสว่าง',
   switchToDark: 'เปลี่ยนเป็นโหมดมืด',
+  
+  // Accessibility
+  skipToMainContent: 'ข้ามไปยังเนื้อหาหลัก',
+  openMenu: 'เปิดเมนู',
+  closeMenu: 'ปิดเมนู',
+  expandMenu: 'ขยายเมนู',
+  collapseMenu: 'ย่อเมนู',
   
   // Placeholders
   enterEmail: 'กรอกอีเมล',
@@ -153,6 +166,23 @@ export const THAI_LABELS = {
   duplicateCode: 'รหัสสินค้านี้มีอยู่แล้ว',
   invalidDateFormat: 'รูปแบบวันที่ไม่ถูกต้อง (DD/MM/YYYY)',
   invalidDate: 'วันที่ไม่ถูกต้อง',
+  
+  // Error page messages
+  pageNotFound: 'ไม่พบหน้าที่ต้องการ',
+  pageNotFoundDescription: 'ขออภัย ไม่พบหน้าที่คุณกำลังค้นหา หน้านี้อาจถูกย้ายหรือลบไปแล้ว',
+  serverError: 'เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์',
+  serverErrorDescription: 'ขออภัย เกิดข้อผิดพลาดในการประมวลผลคำขอของคุณ กรุณาลองใหม่อีกครั้งในภายหลัง',
+  somethingWentWrong: 'เกิดข้อผิดพลาดบางอย่าง',
+  tryAgain: 'ลองอีกครั้ง',
+  retry: 'ลองใหม่',
+  goHome: 'กลับหน้าหลัก',
+  reload: 'โหลดหน้าใหม่',
+  
+  // Empty state messages
+  noDataAvailable: 'ไม่มีข้อมูล',
+  noResultsFound: 'ไม่พบผลลัพธ์',
+  noItemsToDisplay: 'ไม่มีรายการที่จะแสดง',
+  emptyList: 'รายการว่างเปล่า',
   
   // Forgot password
   forgotPasswordTitle: 'ลืมรหัสผ่าน',

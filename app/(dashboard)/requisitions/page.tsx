@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Requisition } from '@/lib/types';
 import { Button } from '@/components/ui/button';
+import { StatusBadge, StatusType } from '@/components/ui/status-badge';
+import { StatCard } from '@/components/dashboard/stat-card';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 import { formatDate } from '@/lib/utils/format';
 
@@ -52,17 +54,7 @@ export default function RequisitionsPage() {
     fetchData();
   }, []);
 
-  // Get status display
-  const getStatusDisplay = (status: Requisition['status']) => {
-    const statusMap = {
-      draft: { text: THAI_LABELS.draft, color: 'var(--color-text-secondary)' },
-      pending: { text: THAI_LABELS.pending, color: 'var(--color-warning)' },
-      approved: { text: THAI_LABELS.approved, color: 'var(--color-success)' },
-      rejected: { text: THAI_LABELS.rejected, color: 'var(--color-error)' },
-      issued: { text: THAI_LABELS.issued, color: 'var(--color-primary)' }
-    };
-    return statusMap[status] || { text: status, color: 'var(--color-text)' };
-  };
+
 
   return (
     <div className="space-y-6">
@@ -157,65 +149,71 @@ export default function RequisitionsPage() {
       </div>
 
       {/* Statistics */}
-      <div
-        className="p-6 rounded-lg border"
-        style={{
-          backgroundColor: 'var(--color-surface)',
-          borderColor: 'var(--color-border)',
-        }}
-      >
+      <div>
         <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--color-text)' }}>
           สถิติการเบิกสินค้า
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold" style={{ color: 'var(--color-text)' }}>
-              {stats.total}
-            </div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              ทั้งหมด
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold" style={{ color: 'var(--color-text-secondary)' }}>
-              {stats.draft}
-            </div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              {THAI_LABELS.draft}
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold" style={{ color: 'var(--color-warning)' }}>
-              {stats.pending}
-            </div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              {THAI_LABELS.pending}
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold" style={{ color: 'var(--color-success)' }}>
-              {stats.approved}
-            </div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              {THAI_LABELS.approved}
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold" style={{ color: 'var(--color-error)' }}>
-              {stats.rejected}
-            </div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              {THAI_LABELS.rejected}
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold" style={{ color: 'var(--color-primary)' }}>
-              {stats.issued}
-            </div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              {THAI_LABELS.issued}
-            </div>
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <StatCard
+            title="ทั้งหมด"
+            value={stats.total}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            }
+            color="var(--color-text)"
+          />
+          <StatCard
+            title={THAI_LABELS.draft}
+            value={stats.draft}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            }
+            color="var(--color-text-secondary)"
+          />
+          <StatCard
+            title={THAI_LABELS.pending}
+            value={stats.pending}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            }
+            color="var(--color-warning)"
+          />
+          <StatCard
+            title={THAI_LABELS.approved}
+            value={stats.approved}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            }
+            color="var(--color-success)"
+          />
+          <StatCard
+            title={THAI_LABELS.rejected}
+            value={stats.rejected}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            }
+            color="var(--color-error)"
+          />
+          <StatCard
+            title={THAI_LABELS.issued}
+            value={stats.issued}
+            icon={
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            }
+            color="var(--color-primary)"
+          />
         </div>
       </div>
 
@@ -232,7 +230,7 @@ export default function RequisitionsPage() {
             การเบิกล่าสุด
           </h2>
           <Link href="/requisitions/history">
-            <Button variant="outline" size="sm">
+            <Button variant="secondary" size="sm">
               ดูทั้งหมด
             </Button>
           </Link>
@@ -262,15 +260,7 @@ export default function RequisitionsPage() {
                     <span className="font-mono text-sm" style={{ color: 'var(--color-primary)' }}>
                       {requisition.documentNumber}
                     </span>
-                    <span
-                      className="px-2 py-1 rounded-full text-xs font-medium"
-                      style={{
-                        backgroundColor: `${getStatusDisplay(requisition.status).color}20`,
-                        color: getStatusDisplay(requisition.status).color,
-                      }}
-                    >
-                      {getStatusDisplay(requisition.status).text}
-                    </span>
+                    <StatusBadge status={requisition.status as StatusType} size="sm" />
                   </div>
                   <div className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
                     {requisition.items.length} รายการ • {formatDate(requisition.createdAt)}
@@ -282,7 +272,7 @@ export default function RequisitionsPage() {
                   )}
                 </div>
                 <Link href={`/requisitions/history`}>
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     ดูรายละเอียด
                   </Button>
                 </Link>

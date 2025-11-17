@@ -6,6 +6,7 @@ import { Table, Column } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
+import { StatusBadge } from '@/components/ui/status-badge';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 
 interface ProductFormData extends CreateInventoryItemForm {
@@ -222,14 +223,44 @@ export default function ProductsPage() {
     }
   };
 
-  // Get stock status display
-  const getStockStatus = (item: InventoryItem) => {
+  // Get stock status badge
+  const getStockStatusBadge = (item: InventoryItem) => {
     if (item.currentStock === 0) {
-      return { text: THAI_LABELS.outOfStock, color: 'var(--color-error)' };
+      return (
+        <StatusBadge 
+          status="rejected" 
+          size="sm"
+          icon={
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          }
+        />
+      );
     } else if (item.currentStock <= item.minimumStock) {
-      return { text: THAI_LABELS.lowStock, color: 'var(--color-warning)' };
+      return (
+        <StatusBadge 
+          status="pending" 
+          size="sm"
+          icon={
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          }
+        />
+      );
     } else {
-      return { text: THAI_LABELS.inStock, color: 'var(--color-success)' };
+      return (
+        <StatusBadge 
+          status="approved" 
+          size="sm"
+          icon={
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          }
+        />
+      );
     }
   };
 
@@ -271,19 +302,14 @@ export default function ProductsPage() {
     {
       key: 'currentStock',
       header: THAI_LABELS.currentStock,
-      width: '100px',
+      width: '150px',
       align: 'right',
-      render: (item) => {
-        const status = getStockStatus(item);
-        return (
-          <div className="text-right">
-            <div className="font-semibold">{item.currentStock.toLocaleString()}</div>
-            <div className="text-xs" style={{ color: status.color }}>
-              {status.text}
-            </div>
-          </div>
-        );
-      },
+      render: (item) => (
+        <div className="flex flex-col items-end gap-2">
+          <div className="font-semibold">{item.currentStock.toLocaleString()}</div>
+          {getStockStatusBadge(item)}
+        </div>
+      ),
     },
     {
       key: 'minimumStock',
@@ -295,18 +321,24 @@ export default function ProductsPage() {
     {
       key: 'isActive',
       header: 'สถานะ',
-      width: '80px',
+      width: '120px',
       align: 'center',
       render: (item) => (
-        <span
-          className="px-2 py-1 rounded-full text-xs font-medium"
-          style={{
-            backgroundColor: item.isActive ? 'var(--color-success-light)' : 'var(--color-error-light)',
-            color: item.isActive ? 'var(--color-success)' : 'var(--color-error)',
-          }}
-        >
-          {item.isActive ? 'เปิดใช้' : 'ปิดใช้'}
-        </span>
+        <StatusBadge 
+          status={item.isActive ? 'approved' : 'cancelled'} 
+          size="sm"
+          icon={
+            item.isActive ? (
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )
+          }
+        />
       ),
     },
     {

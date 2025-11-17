@@ -9,8 +9,9 @@ export async function POST(request: NextRequest) {
       data: { message: 'ออกจากระบบเรียบร้อยแล้ว' }
     });
 
-    // Clear the auth token cookie
+    // Clear the auth cookies
     response.cookies.delete('auth-token');
+    response.cookies.delete('refresh-token');
 
     return response;
 

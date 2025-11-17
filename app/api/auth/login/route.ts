@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { mockDb } from '@/lib/database/mock-database';
-import { generateToken, comparePassword } from '@/lib/auth/jwt';
+import { generateAuthTokens, comparePassword, ACCESS_TOKEN_MAX_AGE, REFRESH_TOKEN_MAX_AGE } from '@/lib/auth/jwt';
 import { LoginCredentials, ApiResponse, AuthUser } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -45,7 +45,6 @@ export async function POST(request: NextRequest) {
 
     // Verify password
     const isValidPassword = comparePassword(password, user.password);
-    console.log(isValidPassword)
     if (!isValidPassword) {
       return NextResponse.json<ApiResponse>({
         success: false,
@@ -65,8 +64,8 @@ export async function POST(request: NextRequest) {
       department: user.department
     };
 
-    // Generate JWT token
-    const token = generateToken(authUser);
+    // Generate JWT tokens
+    const { accessToken, refreshToken } = generateAuthTokens(authUser);
 
     // Create response
     const response = NextResponse.json<ApiResponse<AuthUser>>({
@@ -74,12 +73,20 @@ export async function POST(request: NextRequest) {
       data: authUser
     });
 
-    // Set HTTP-only cookie
-    response.cookies.set('auth-token', token, {
+    // Set HTTP-only cookies
+    response.cookies.set('auth-token', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60, // 7 days
+      maxAge: ACCESS_TOKEN_MAX_AGE,
+      path: '/'
+    });
+
+    response.cookies.set('refresh-token', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: REFRESH_TOKEN_MAX_AGE,
       path: '/'
     });
 

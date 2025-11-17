@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Requisition, InventoryItem, User, ApiResponse } from '@/lib/types';
 import { ApprovalQueueTable } from '@/components/tables/approval-queue-table';
+import { Button } from '@/components/ui/button';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
 
 export default function ApprovalsPage() {
@@ -143,7 +144,7 @@ export default function ApprovalsPage() {
 
       {/* Status Filter */}
       <div className="mb-6">
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2">
           {[
             { value: 'pending', label: THAI_LABELS.pending },
             { value: 'approved', label: THAI_LABELS.approved },
@@ -151,18 +152,14 @@ export default function ApprovalsPage() {
             { value: 'issued', label: THAI_LABELS.issued },
             { value: 'all', label: 'ทั้งหมด' }
           ].map((status) => (
-            <button
+            <Button
               key={status.value}
               onClick={() => setStatusFilter(status.value)}
-              className="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-              style={{
-                backgroundColor: statusFilter === status.value ? 'var(--color-primary)' : 'var(--color-surface)',
-                color: statusFilter === status.value ? '#ffffff' : 'var(--color-text)',
-                border: `1px solid ${statusFilter === status.value ? 'var(--color-primary)' : 'var(--color-border)'}`
-              }}
+              variant={statusFilter === status.value ? 'primary' : 'secondary'}
+              size="sm"
             >
               {status.label}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

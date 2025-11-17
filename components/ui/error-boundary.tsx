@@ -1,17 +1,26 @@
 'use client';
 
 import { Component, ReactNode } from 'react';
+import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { Button } from './button';
 
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  resetKeys?: Array<string | number>;
 }
 
 interface State {
   hasError: boolean;
   error?: Error;
+  errorInfo?: React.ErrorInfo;
 }
 
+/**
+ * Enhanced Error Boundary component with logging and user-friendly fallback UI
+ * Catches React component errors and displays a fallback UI
+ */
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -22,51 +31,149 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    // Log error for debugging
     console.error('ErrorBoundary caught an error:', error, errorInfo);
+    
+    // Log to error tracking service in production
+    if (process.env.NODE_ENV === 'production') {
+      this.logErrorToService(error, errorInfo);
+    }
+
+    // Call custom error handler if provided
+    if (this.props.onError) {
+      this.props.onError(error, errorInfo);
+    }
+
+    this.setState({ errorInfo });
   }
+
+  componentDidUpdate(prevProps: Props) {
+    // Reset error state if resetKeys change
+    if (
+      this.state.hasError &&
+      this.props.resetKeys &&
+      prevProps.resetKeys &&
+      this.props.resetKeys.some((key, index) => key !== prevProps.resetKeys?.[index])
+    ) {
+      this.setState({ hasError: false, error: undefined, errorInfo: undefined });
+    }
+  }
+
+  logErrorToService(error: Error, errorInfo: React.ErrorInfo) {
+    // In production, send error to logging service
+    // Example: Sentry, LogRocket, etc.
+    const errorData = {
+      message: error.message,
+      stack: error.stack,
+      componentStack: errorInfo.componentStack,
+      timestamp: new Date().toISOString(),
+      userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'unknown',
+      url: typeof window !== 'undefined' ? window.location.href : 'unknown',
+    };
+
+    // Log to console in production for now
+    console.error('Error logged:', errorData);
+    
+    // TODO: Send to error tracking service
+    // Example: Sentry.captureException(error, { contexts: { react: errorInfo } });
+  }
+
+  handleReset = () => {
+    this.setState({ hasError: false, error: undefined, errorInfo: undefined });
+  };
+
+  handleReload = () => {
+    window.location.reload();
+  };
+
+  handleGoHome = () => {
+    window.location.href = '/dashboard';
+  };
 
   render() {
     if (this.state.hasError) {
+      // Use custom fallback if provided
       if (this.props.fallback) {
         return this.props.fallback;
       }
 
+      // Default fallback UI
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-          <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <div className="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 dark:bg-red-900 rounded-full mb-4">
-              <svg
-                className="w-6 h-6 text-red-600 dark:text-red-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
+        <div
+          className="min-h-screen flex items-center justify-center px-4"
+          style={{ backgroundColor: 'var(--color-background)' }}
+        >
+          <div
+            className="max-w-md w-full rounded-lg p-8"
+            style={{
+              backgroundColor: 'var(--color-surface)',
+              boxShadow: 'var(--shadow-lg)',
+            }}
+          >
+            <div
+              className="flex items-center justify-center w-16 h-16 mx-auto rounded-full mb-6"
+              style={{
+                backgroundColor: 'var(--color-error)',
+                opacity: 0.1,
+              }}
+            >
+              <AlertTriangle
+                className="w-8 h-8"
+                style={{ color: 'var(--color-error)' }}
+                aria-hidden="true"
+              />
             </div>
-            <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-white mb-2">
+            <h2
+              className="text-2xl font-semibold text-center mb-3"
+              style={{ color: 'var(--color-text)' }}
+            >
               เกิดข้อผิดพลาด
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-4">
+            <p
+              className="text-center text-base mb-6"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
               ขออภัย เกิดข้อผิดพลาดในการแสดงผล กรุณาลองใหม่อีกครั้ง
             </p>
+            
+            {/* Show error details in development */}
             {this.state.error && process.env.NODE_ENV === 'development' && (
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-700 dark:text-gray-300 overflow-auto">
-                <pre>{this.state.error.message}</pre>
+              <div
+                className="mt-4 p-4 rounded-lg text-xs overflow-auto max-h-48"
+                style={{
+                  backgroundColor: 'var(--color-surface-hover)',
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                <div className="font-semibold mb-2">Error Details:</div>
+                <pre className="whitespace-pre-wrap break-words mb-3">
+                  {this.state.error.message}
+                </pre>
+                {this.state.error.stack && (
+                  <>
+                    <div className="font-semibold mb-2">Stack Trace:</div>
+                    <pre className="whitespace-pre-wrap break-words text-xs opacity-70">
+                      {this.state.error.stack}
+                    </pre>
+                  </>
+                )}
               </div>
             )}
-            <button
-              onClick={() => window.location.reload()}
-              className="w-full mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-            >
-              โหลดหน้าใหม่
-            </button>
+
+            <div className="flex flex-col gap-3 mt-6">
+              <Button onClick={this.handleReset} variant="primary" fullWidth>
+                <RefreshCw className="w-4 h-4 mr-2" aria-hidden="true" />
+                ลองอีกครั้ง
+              </Button>
+              <Button onClick={this.handleReload} variant="secondary" fullWidth>
+                โหลดหน้าใหม่
+              </Button>
+              <Button onClick={this.handleGoHome} variant="tertiary" fullWidth>
+                <Home className="w-4 h-4 mr-2" aria-hidden="true" />
+                กลับหน้าหลัก
+              </Button>
+            </div>
           </div>
         </div>
       );

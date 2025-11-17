@@ -1,3 +1,11 @@
 export { AppLayout } from './app-layout';
 export { ThemeProvider, useTheme } from './theme-provider';
 export { ThemeToggle } from './theme-toggle';
+export { AppHeader } from './app-header';
+export { BackButton } from './back-button';
+export { Sidebar } from './sidebar';
+export { MobileMenu } from './mobile-menu';
+export { Breadcrumbs } from './breadcrumbs';
+export { DashboardLayout } from './dashboard-layout';
+export type { MenuItem } from './sidebar';
+export type { BreadcrumbItem } from './breadcrumbs';

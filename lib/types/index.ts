@@ -113,10 +113,16 @@ export interface AuthUser {
   department: string;
 }
 
+export type TokenType = 'access' | 'refresh';
+
 export interface JWTPayload {
   userId: string;
   email: string;
+  name: string;
+  department: string;
   role: 'user' | 'admin';
+  tokenType: TokenType;
+  sessionId: string;
   iat: number;
   exp: number;
 }
