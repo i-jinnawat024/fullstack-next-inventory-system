@@ -35,12 +35,12 @@ export default function AdminPage() {
       href: '/admin/reports',
       icon: '📊',
     },
-    {
-      title: THAI_LABELS.import,
-      description: 'นำเข้าข้อมูลจากไฟล์ Excel',
-      href: '/admin/import',
-      icon: '📥',
-    },
+    // {
+    //   title: THAI_LABELS.import,
+    //   description: 'นำเข้าข้อมูลจากไฟล์ Excel',
+    //   href: '/admin/import',
+    //   icon: '📥',
+    // },
     {
       title: THAI_LABELS.products,
       description: 'จัดการข้อมูลสินค้า',
