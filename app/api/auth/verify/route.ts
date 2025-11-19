@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
         success: false,
         error: {
           code: 'UNAUTHORIZED',
-          message: '�1,�,��1^�,z�,s�,,�1%�,-�,��,1�,��,o�,1�1%�1��,S�1%',
+          message: 'Unauthorized access. Please login again.',
         },
       }, { status: 401 });
     }
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
-        message: '�1?�,?�,'�,"�,,�1%�,-�,o�,'�,"�,z�,��,��,"�,��,��,��1��,T�,��,��,s�,s',
+        message: 'Internal server error. Please try again later.',
       },
     }, { status: 500 });
   }

@@ -467,7 +467,7 @@ export default function RequisitionHistoryPage() {
             {/* ปุ่ม Actions */}
             <div className="flex flex-wrap justify-end gap-3 pt-6 border-t border-border">
               <Button
-                variant="outline"
+                variant="secondary"
                 size="lg"
                 onClick={() => exportToPDF(selectedRequisition)}
                 className="gap-2 cursor-pointer"
