@@ -374,7 +374,7 @@ export default function CreateRequisitionPage() {
                   คงเหลือ: {item.item?.currentStock?.toLocaleString()}
                 </div>
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => removeItem(index)}
                   className="text-red-600 hover:text-red-700"
@@ -418,14 +418,14 @@ export default function CreateRequisitionPage() {
       {/* Actions */}
       <div className="flex justify-end gap-3">
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() => router.back()}
           disabled={loading}
         >
           {THAI_LABELS.cancel}
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={saveDraft}
           disabled={loading || items.length === 0}
         >
@@ -532,7 +532,7 @@ export default function CreateRequisitionPage() {
           {/* Footer */}
           <div className="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-700">
             <Button
-              variant="outline"
+              variant="secondary"
               size="lg"
               onClick={() => setShowInventoryModal(false)}
               className="min-w-32"
