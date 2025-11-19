@@ -18,38 +18,34 @@ interface ThemeProviderProps {
   defaultTheme?: Theme;
 }
 
-export function ThemeProvider({ children, defaultTheme = 'dark' }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme);
-  const [mounted, setMounted] = useState(false);
-
+export function ThemeProvider({ children, defaultTheme = 'light' }: ThemeProviderProps) {
   // Load theme from localStorage on mount (Requirement 11.3, 11.6)
-  useEffect(() => {
+  // Use lazy initialization to avoid calling setState in effect
+  const getInitialTheme = (): Theme => {
+    if (typeof window === 'undefined') return defaultTheme;
     const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
-      setThemeState(savedTheme);
-    } else {
-      // Set dark mode as default
-      setThemeState('dark');
+      return savedTheme;
     }
-    setMounted(true);
-  }, []);
+    return 'light';
+  };
+
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   // Apply theme to document with smooth transitions (Requirement 11.4)
   useEffect(() => {
-    if (mounted) {
-      const root = document.documentElement;
-      
-      // Apply theme attribute
-      if (theme === 'dark') {
-        root.setAttribute('data-theme', 'dark');
-      } else {
-        root.removeAttribute('data-theme');
-      }
-      
-      // Persist theme preference (Requirement 11.3)
-      localStorage.setItem('theme', theme);
+    const root = document.documentElement;
+    
+    // Apply theme attribute
+    if (theme === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+    } else {
+      root.removeAttribute('data-theme');
     }
-  }, [theme, mounted]);
+    
+    // Persist theme preference (Requirement 11.3)
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     setThemeState(prev => prev === 'light' ? 'dark' : 'light');
@@ -61,9 +57,7 @@ export function ThemeProvider({ children, defaultTheme = 'dark' }: ThemeProvider
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
-      <div style={{ visibility: mounted ? 'visible' : 'hidden' }}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 }

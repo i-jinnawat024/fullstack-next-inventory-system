@@ -8,6 +8,19 @@ import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { Table, Column } from "@/components/ui/table";
 import { THAI_LABELS } from "@/lib/constants/thai-labels";
+import {
+  FileText,
+  Package,
+  Plus,
+  Archive,
+  PenLine,
+  X,
+  Save,
+  CheckCircle,
+  Loader2,
+  Search,
+  Trash2
+} from "lucide-react";
 
 interface RequisitionItem {
   inventoryItemId: string;
@@ -220,7 +233,7 @@ export default function CreateRequisitionPage() {
       width: "120px",
       render: (item) => (
         <span
-          className="font-mono text-sm"
+          className="font-mono text-sm font-semibold"
           style={{ color: "var(--color-primary)" }}
         >
           {item.code}
@@ -276,6 +289,7 @@ export default function CreateRequisitionPage() {
           size="sm"
           onClick={() => addItem(item)}
           disabled={item.currentStock === 0}
+          className="cursor-pointer"
         >
           เลือก
         </Button>
@@ -285,71 +299,113 @@ export default function CreateRequisitionPage() {
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div>
-        <h1
-          className="text-2xl font-bold"
-          style={{ color: "var(--color-text)" }}
-        >
-          {THAI_LABELS.createRequisition}
-        </h1>
-        <p
-          className="text-sm mt-1"
-          style={{ color: "var(--color-text-secondary)" }}
-        >
-          สร้างใบเบิกสินค้าใหม่
-        </p>
+      {/* Page Header with Gradient */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 p-8 shadow-xl">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
+        <div className="relative flex items-center gap-4">
+          <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
+            <FileText className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-white">
+              {THAI_LABELS.createRequisition}
+            </h1>
+            <p className="text-white/90 mt-1">
+              สร้างใบเบิกสินค้าใหม่และเลือกรายการที่ต้องการ
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Add Items Section */}
       <div
-        className="p-4 rounded-lg border"
+        className="p-6 rounded-2xl border shadow-lg transition-all duration-300 hover:shadow-xl"
         style={{
           backgroundColor: "var(--color-surface)",
           borderColor: "var(--color-border)",
         }}
       >
-        <div className="flex justify-between items-center mb-4">
-          <h2
-            className="text-lg font-semibold"
-            style={{ color: "var(--color-text)" }}
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-md">
+              <Package className="w-6 h-6 text-white" />
+            </div>
+            <h2
+              className="text-xl font-bold"
+              style={{ color: "var(--color-text)" }}
+            >
+              รายการสินค้า
+            </h2>
+            {items.length > 0 && (
+              <span className="px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md">
+                {items.length} รายการ
+              </span>
+            )}
+          </div>
+          <Button
+            onClick={() => setShowInventoryModal(true)}
+            className="inline-flex items-center cursor-pointer whitespace-nowrap min-w-[64px] shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
           >
-            รายการสินค้า
-          </h2>
-          <Button onClick={() => setShowInventoryModal(true)} className="cursor-pointer whitespace-nowrap min-w-[64px]">
+            <Plus className="w-5 h-5 mr-2" />
             เพิ่มสินค้า
           </Button>
+
         </div>
 
         {items.length === 0 ? (
-          <div
-            className="text-center py-8"
-            style={{ color: "var(--color-text-secondary)" }}
-          >
-            ยังไม่มีรายการสินค้า กรุณาเพิ่มสินค้าที่ต้องการเบิก
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 mb-4">
+              <Archive className="w-10 h-10 text-gray-400" />
+            </div>
+            <p
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              ยังไม่มีรายการสินค้า
+            </p>
+            <p
+              className="text-sm"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              กรุณาเพิ่มสินค้าที่ต้องการเบิกโดยคลิกปุ่ม "เพิ่มสินค้า" ด้านบน
+            </p>
           </div>
         ) : (
           <div className="space-y-3">
             {items.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center gap-4 p-3 rounded-md border"
+                className="group flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-md hover:scale-[1.01]"
                 style={{
                   backgroundColor: "var(--color-bg-secondary)",
                   borderColor: "var(--color-border)",
                 }}
               >
-                <div className="flex-1">
-                  <div className="font-medium">{item.item?.name}</div>
+                {/* Item Icon */}
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 flex items-center justify-center">
+                  <Package className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                </div>
+
+                {/* Item Details */}
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-lg truncate" style={{ color: "var(--color-text)" }}>
+                    {item.item?.name}
+                  </div>
                   <div
-                    className="text-sm"
+                    className="text-sm flex items-center gap-2 mt-1"
                     style={{ color: "var(--color-text-secondary)" }}
                   >
-                    {item.item?.code} • {item.item?.category}
+                    <span className="font-mono bg-indigo-100 dark:bg-indigo-900 px-2 py-0.5 rounded text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+                      {item.item?.code}
+                    </span>
+                    <span>•</span>
+                    <span>{item.item?.category}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <label className="text-sm">จำนวน:</label>
+
+                {/* Quantity Controls */}
+                <div className="flex items-center gap-3 bg-white  px-4 py-2 rounded-lg border" style={{ borderColor: "var(--color-border)" }}>
+                  <label className="text-sm font-medium" style={{ color: "var(--color-text)" }}>จำนวน:</label>
                   <Input
                     type="number"
                     min="1"
@@ -358,28 +414,35 @@ export default function CreateRequisitionPage() {
                     onChange={(e) =>
                       updateQuantity(index, parseInt(e.target.value) || 0)
                     }
-                    className="w-20"
+                    className="w-20 text-center font-semibold"
                   />
                   <span
-                    className="text-sm"
+                    className="text-sm font-medium"
                     style={{ color: "var(--color-text-secondary)" }}
                   >
                     {item.item?.unit}
                   </span>
                 </div>
+
+                {/* Stock Info */}
                 <div
-                  className="text-sm"
+                  className="text-sm text-right min-w-[100px]"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
-                  คงเหลือ: {item.item?.currentStock?.toLocaleString()}
+                  <div className="font-medium">คงเหลือ</div>
+                  <div className="font-bold text-lg" style={{ color: "var(--color-text)" }}>
+                    {item.item?.currentStock?.toLocaleString()}
+                  </div>
                 </div>
+
+                {/* Remove Button */}
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => removeItem(index)}
-                  className="text-red-600 hover:text-red-700"
+                  className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
                 >
-                  ลบ
+                  <Trash2 className="w-5 h-5" />
                 </Button>
               </div>
             ))}
@@ -389,26 +452,31 @@ export default function CreateRequisitionPage() {
 
       {/* Notes Section */}
       <div
-        className="p-4 rounded-lg border"
+        className="p-6 rounded-2xl border shadow-lg transition-all duration-300 hover:shadow-xl"
         style={{
           backgroundColor: "var(--color-surface)",
           borderColor: "var(--color-border)",
         }}
       >
-        <label
-          className="block text-sm font-medium mb-2"
-          style={{ color: "var(--color-text)" }}
-        >
-          {THAI_LABELS.notes}
-        </label>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-md">
+            <PenLine className="w-6 h-6 text-white" />
+          </div>
+          <label
+            className="text-lg font-bold"
+            style={{ color: "var(--color-text)" }}
+          >
+            {THAI_LABELS.notes}
+          </label>
+        </div>
         <textarea
-          className="w-full px-3 py-2 rounded-md border resize-none transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-3 rounded-xl border resize-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           style={{
             backgroundColor: "var(--color-surface)",
             borderColor: "var(--color-border)",
             color: "var(--color-text)",
           }}
-          rows={3}
+          rows={4}
           placeholder={THAI_LABELS.enterNotes}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
@@ -416,26 +484,41 @@ export default function CreateRequisitionPage() {
       </div>
 
       {/* Actions */}
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end gap-3 pt-4">
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() => router.back()}
           disabled={loading}
+          className="min-w-[120px] cursor-pointer"
         >
+          <X className="w-5 h-5 mr-2" />
           {THAI_LABELS.cancel}
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={saveDraft}
           disabled={loading || items.length === 0}
+          className="min-w-[120px] cursor-pointer"
         >
+          <Save className="w-5 h-5 mr-2" />
           บันทึกร่าง
         </Button>
         <Button
           onClick={submitRequisition}
           disabled={loading || items.length === 0}
+          className="min-w-[120px] bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
         >
-          {loading ? "กำลังส่ง..." : "ส่งคำขอ"}
+          {loading ? (
+            <>
+              <Loader2 className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" />
+              กำลังส่ง...
+            </>
+          ) : (
+            <>
+              <CheckCircle className="w-5 h-5 mr-2" />
+              ส่งคำขอ
+            </>
+          )}
         </Button>
       </div>
 
@@ -449,12 +532,15 @@ export default function CreateRequisitionPage() {
         <div className="p-6 pt-4 space-y-6">
           {/* Search + Filter */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              placeholder={THAI_LABELS.searchProducts}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full"
-            />
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Input
+                placeholder={THAI_LABELS.searchProducts}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10"
+              />
+            </div>
             <select
               className="w-full px-4 py-2.5 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
               style={{
@@ -483,7 +569,6 @@ export default function CreateRequisitionPage() {
                 borderColor: "var(--color-border)",
               }}
             >
-              {/* CSS สำคัญมาก! ใส่ใน <style jsx> หรือ global ก็ได้ */}
               <style jsx>{`
                 table {
                   border-collapse: separate;
@@ -498,7 +583,6 @@ export default function CreateRequisitionPage() {
                   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
                   border-bottom: 1px solid var(--color-border);
                 }
-                /* เงาเล็ก ๆ ตอนเลื่อนลง (ดูแพงมาก) */
                 thead th::after {
                   content: "";
                   position: absolute;
@@ -511,7 +595,6 @@ export default function CreateRequisitionPage() {
                   opacity: 0;
                   transition: opacity 0.3s;
                 }
-                /* แสดงเงาตอนเลื่อน */
                 tbody tr:first-child ~ tr th::after,
                 tbody:hover ~ thead th::after,
                 thead th::after {
@@ -532,7 +615,7 @@ export default function CreateRequisitionPage() {
           {/* Footer */}
           <div className="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-700">
             <Button
-              variant="outline"
+              variant="secondary"
               size="lg"
               onClick={() => setShowInventoryModal(false)}
               className="min-w-32"

@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useRef, useState, useEffect, memo } from 'react';
+import React, { ReactNode, useRef, useState, useEffect, memo } from 'react';
 
 interface VirtualizedListProps<T> {
   items: T[];
@@ -55,4 +55,4 @@ export const VirtualizedList = memo(function VirtualizedList<T>({
       </div>
     </div>
   );
-}) as <T>(props: VirtualizedListProps<T>) => JSX.Element;
+}) as <T>(props: VirtualizedListProps<T>) => React.ReactElement;
