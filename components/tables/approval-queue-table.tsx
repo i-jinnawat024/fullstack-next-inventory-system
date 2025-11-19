@@ -395,6 +395,7 @@ export function ApprovalQueueTable({
                       variant="secondary"
                       size="sm"
                       onClick={() => handleViewDetails(requisition)}
+                      className='cursor-pointer'
                     >
                       ดูรายละเอียด
                     </Button>
