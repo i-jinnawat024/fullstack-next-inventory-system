@@ -17,9 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "�,��,��,s�,s�1?�,s�,'�,?�,��,'�,T�,,�1%�,��,,�,��,�,؅,��,'�,T�,,�1%�,�",
-  description:
-    "�,��,��,s�,s�,^�,�,\"�,?�,��,��,?�,��,��1?�,s�,'�,?�,��,'�,T�,,�1%�,��1?�,��,��,,�,��,�,؅,��,'�,T�,,�1%�,�",
+  title: "ระบบเบิกสินค้า",
+  description: "ระบบจัดการคำขอเบิกสินค้าและคลังสินค้า",
 };
 
 export default function RootLayout({
@@ -32,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider defaultTheme="dark">
           <NotificationProvider>
             <div
               className="flex min-h-screen flex-col"
@@ -58,10 +57,10 @@ export default function RootLayout({
             >
               <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-6 text-sm sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:justify-between">
                 <span style={{ color: "var(--color-text-muted)" }}>
-                  Ac {currentYear} �,��,��,s�,s�,,�,��,�,؅,�,�,��,"�,, A� �,��,؅,�,T�,��,'�,,�,��,'�,-�,~�,'�1O
+                  © {currentYear} ระบบเบิกสินค้า. All rights reserved.
                 </span>
                 <span style={{ color: "var(--color-text-secondary)" }}>
-                  �,��,��1%�,��,؅,,�,�1%�,T�1?�,z�,��1^�,-�,��,T�,�,s�,��,T�,,�,T�,?�,��,��,-�,3�,؅,��,T�,,�,-�,؅,-�,�,��,z�,�,��,"�,,
+                  พัฒนาโดยทีมไอทีเพื่อการจัดการคลังสินค้าที่มีประสิทธิภาพ
                 </span>
               </div>
             </footer>

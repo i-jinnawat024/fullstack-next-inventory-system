@@ -6,6 +6,7 @@ export { StatusBadge } from './status-badge';
 export { Spinner, LoadingSpinner, LoadingPage, OverlayLoader } from './loading-spinner';
 export { Skeleton, SkeletonText, SkeletonCard, SkeletonTable } from './skeleton';
 export { ProgressBar, CircularProgress } from './progress-bar';
+export { ConfirmationDialog } from './confirmation-dialog';
 export { Icons, iconSizes } from '@/lib/utils/icons';
 
 export type { ButtonProps } from './button';

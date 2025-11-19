@@ -8,6 +8,7 @@ import {
 } from '@/lib/auth/jwt';
 import { AuthUser, JWTPayload } from '@/lib/types';
 
+// Public routes that don't require authentication
 const PUBLIC_ROUTES = [
   '/login',
   '/forgot-password',
@@ -16,6 +17,8 @@ const PUBLIC_ROUTES = [
   '/api/auth/refresh',
   '/api/auth/verify',
 ];
+
+// Admin-only routes that require admin role
 const ADMIN_ROUTES = ['/admin', '/api/admin'];
 
 interface AuthSuccess {
@@ -49,11 +52,13 @@ export function middleware(request: NextRequest) {
 
   const { payload, response } = authResult;
 
+  // Check if route requires admin role
   const isAdminRoute = ADMIN_ROUTES.some(route => pathname.startsWith(route));
   if (isAdminRoute && payload.role !== 'admin') {
     return handleForbidden(request);
   }
 
+  // Set user information in headers for server components and API routes
   response.headers.set('x-user-id', payload.userId);
   response.headers.set('x-user-role', payload.role);
   response.headers.set('x-user-email', payload.email);

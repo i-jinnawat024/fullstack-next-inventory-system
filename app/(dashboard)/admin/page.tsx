@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { THAI_LABELS } from '@/lib/constants/thai-labels';
@@ -10,6 +10,12 @@ export default function AdminPage() {
       description: 'จัดการคำขอเบิกสินค้าที่รอการอนุมัติ',
       href: '/admin/approvals',
       icon: '✓',
+    },
+    {
+      title: THAI_LABELS.userManagement,
+      description: 'จัดการสิทธิ์และสถานะของบัญชีผู้ใช้งานทั้งหมด',
+      href: '/admin/users',
+      icon: '👥',
     },
     {
       title: THAI_LABELS.stockAdjustments,
@@ -93,3 +99,4 @@ export default function AdminPage() {
     </div>
   );
 }
+
