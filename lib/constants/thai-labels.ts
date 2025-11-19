@@ -1,4 +1,4 @@
-// Thai language labels for the application
+﻿// Thai language labels for the application
 export const THAI_LABELS = {
   // Authentication
   login: 'เข้าสู่ระบบ',
@@ -35,6 +35,7 @@ export const THAI_LABELS = {
   createRequisition: 'สร้างใบเบิกสินค้า',
   requisitionHistory: 'ประวัติการเบิกสินค้า',
   adminPanel: 'ผู้ดูแลระบบ',
+  userManagement: 'จัดการผู้ใช้งาน',
   approvals: 'อนุมัติการเบิก',
   approvalQueue: 'คิวการอนุมัติ',
   products: 'จัดการสินค้า',
@@ -153,6 +154,14 @@ export const THAI_LABELS = {
   draftSaved: 'บันทึกร่างเรียบร้อยแล้ว',
   requisitionSubmitted: 'ส่งคำขอเบิกสินค้าเรียบร้อยแล้ว',
   
+  // User management success messages
+  createUserSuccess: 'เพิ่มผู้ใช้งานใหม่เรียบร้อยแล้ว',
+  updateUserSuccess: 'อัพเดทข้อมูลผู้ใช้งานเรียบร้อยแล้ว',
+  deleteUserSuccess: 'ลบผู้ใช้งานเรียบร้อยแล้ว',
+  resetPasswordSuccess: 'รีเซ็ตรหัสผ่านเรียบร้อยแล้ว',
+  changePasswordSuccess: 'เปลี่ยนรหัสผ่านเรียบร้อยแล้ว',
+  updateProfileSuccess: 'อัพเดทข้อมูลโปรไฟล์เรียบร้อยแล้ว',
+  
   // Error messages
   loginError: 'เข้าสู่ระบบไม่สำเร็จ',
   saveError: 'บันทึกข้อมูลไม่สำเร็จ',
@@ -166,6 +175,19 @@ export const THAI_LABELS = {
   duplicateCode: 'รหัสสินค้านี้มีอยู่แล้ว',
   invalidDateFormat: 'รูปแบบวันที่ไม่ถูกต้อง (DD/MM/YYYY)',
   invalidDate: 'วันที่ไม่ถูกต้อง',
+  
+  // User management error messages
+  userNotFound: 'ไม่พบข้อมูลผู้ใช้งาน',
+  emailAlreadyExists: 'อีเมลนี้ถูกใช้งานแล้ว',
+  invalidPassword: 'รหัสผ่านไม่ถูกต้อง',
+  createUserError: 'เกิดข้อผิดพลาดในการสร้างผู้ใช้งาน',
+  updateUserError: 'เกิดข้อผิดพลาดในการอัพเดทข้อมูลผู้ใช้งาน',
+  deleteUserError: 'เกิดข้อผิดพลาดในการลบผู้ใช้งาน',
+  resetPasswordError: 'เกิดข้อผิดพลาดในการรีเซ็ตรหัสผ่าน',
+  changePasswordError: 'เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน',
+  updateProfileError: 'เกิดข้อผิดพลาดในการอัพเดทโปรไฟล์',
+  loadUsersError: 'เกิดข้อผิดพลาดในการโหลดรายการผู้ใช้งาน',
+  loadProfileError: 'เกิดข้อผิดพลาดในการโหลดข้อมูลโปรไฟล์',
   
   // Error page messages
   pageNotFound: 'ไม่พบหน้าที่ต้องการ',

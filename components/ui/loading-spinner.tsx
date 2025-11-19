@@ -30,10 +30,21 @@ export function Spinner({ size = 'md', className }: SpinnerProps) {
   );
 }
 
-export function LoadingSpinner({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+export function LoadingSpinner({ 
+  size = 'md', 
+  text 
+}: { 
+  size?: 'sm' | 'md' | 'lg';
+  text?: string;
+}) {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-3">
       <Spinner size={size} />
+      {text && (
+        <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+          {text}
+        </p>
+      )}
     </div>
   );
 }

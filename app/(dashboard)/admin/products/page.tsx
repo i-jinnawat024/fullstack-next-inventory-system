@@ -42,7 +42,7 @@ export default function ProductsPage() {
 
       const response = await fetch(`/api/inventory?${params.toString()}`);
       const result = await response.json();
-
+      console.log(result)
       if (result.success) {
         setProducts(result.data);
       } else {
@@ -350,7 +350,8 @@ export default function ProductsPage() {
         <div className="flex space-x-2 justify-center">
           <Button
             size="sm"
-            variant="outline"
+            variant="secondary"
+            className='cursor-pointer'
             onClick={() => handleEditProduct(item)}
           >
             {THAI_LABELS.edit}
@@ -358,6 +359,7 @@ export default function ProductsPage() {
           <Button
             size="sm"
             variant={item.isActive ? 'danger' : 'secondary'}
+            className="cursor-pointer whitespace-nowrap min-w-[64px]"
             onClick={() => handleToggleProduct(item)}
           >
             {item.isActive ? 'ปิดใช้' : 'เปิดใช้'}
@@ -516,7 +518,7 @@ export default function ProductsPage() {
           <div className="flex justify-end space-x-3 pt-4">
             <Button
               type="button"
-              variant="outline"
+              variant="secondary"
               onClick={handleCloseModal}
               disabled={submitting}
             >

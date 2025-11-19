@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -165,6 +165,17 @@ export function Sidebar({ user, collapsed = false, onToggle }: SidebarProps) {
           roles: ['admin'],
         },
         {
+          id: 'admin-users',
+          label: THAI_LABELS.userManagement,
+          href: '/admin/users',
+          icon: (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ),
+          roles: ['admin'],
+        },
+        {
           id: 'admin-import',
           label: THAI_LABELS.import,
           href: '/admin/import',
@@ -279,9 +290,8 @@ export function Sidebar({ user, collapsed = false, onToggle }: SidebarProps) {
                 </div>
                 {!collapsed && item.children && (
                   <svg
-                    className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${
-                      isGroupExpanded(item) ? 'rotate-90' : ''
-                    }`}
+                    className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${isGroupExpanded(item) ? 'rotate-90' : ''
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -406,3 +416,4 @@ export function Sidebar({ user, collapsed = false, onToggle }: SidebarProps) {
     </nav>
   );
 }
+

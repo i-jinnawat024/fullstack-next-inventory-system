@@ -1,4 +1,4 @@
-import { lazy, ComponentType, LazyExoticComponent } from 'react';
+import React, { lazy, ComponentType, LazyExoticComponent } from 'react';
 
 /**
  * Utility for lazy loading components with better error handling
@@ -24,7 +24,7 @@ export function lazyLoad<T extends ComponentType<any>>(
           >
             ไม่สามารถโหลดส่วนประกอบได้ กรุณาลองใหม่อีกครั้ง
           </div>
-        )) as T,
+        )) as unknown as T,
       };
     })
   );
