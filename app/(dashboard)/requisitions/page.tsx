@@ -230,7 +230,7 @@ export default function RequisitionsPage() {
             การเบิกล่าสุด
           </h2>
           <Link href="/requisitions/history">
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" className='cursor-pointer'>
               ดูทั้งหมด
             </Button>
           </Link>
@@ -272,7 +272,7 @@ export default function RequisitionsPage() {
                   )}
                 </div>
                 <Link href={`/requisitions/history`}>
-                  <Button variant="secondary" size="sm">
+                  <Button variant="secondary" size="sm" className='cursor-pointer'>
                     ดูรายละเอียด
                   </Button>
                 </Link>

@@ -27,15 +27,15 @@ const statusConfig: Record<StatusType, {
 }> = {
   pending: {
     label: THAI_LABELS.pending,
-    colorClass: 'text-yellow-700 dark:text-yellow-300',
-    bgClass: 'bg-yellow-50 dark:bg-yellow-900/20',
+    colorClass: 'text-yellow-700',
+    bgClass: ' dark:bg-yellow-900/20',
     borderClass: 'border-yellow-200 dark:border-yellow-800',
     defaultIcon: <Icons.Clock className="w-full h-full" aria-hidden={true} />,
   },
   approved: {
     label: THAI_LABELS.approved,
-    colorClass: 'text-green-700 dark:text-green-300',
-    bgClass: 'bg-green-50 dark:bg-green-900/20',
+    colorClass: 'text-green-700',
+    bgClass: 'dark:bg-green-900/20',
     borderClass: 'border-green-200 dark:border-green-800',
     defaultIcon: <Icons.CheckCircle className="w-full h-full" aria-hidden={true} />,
   },
@@ -62,8 +62,8 @@ const statusConfig: Record<StatusType, {
   },
   draft: {
     label: THAI_LABELS.draft,
-    colorClass: 'text-gray-600 dark:text-gray-400',
-    bgClass: 'bg-gray-100 dark:bg-gray-800/50',
+    colorClass: 'text-gray-600 ',
+    bgClass: ' dark:bg-gray-800/50',
     borderClass: 'border-gray-300 dark:border-gray-700',
     defaultIcon: <Icons.Edit className="w-full h-full" aria-hidden={true} />,
   },
@@ -103,13 +103,14 @@ export const StatusBadge = memo(function StatusBadge({
         config.bgClass,
         config.borderClass,
         sizeStyles.container,
-        className
+        "cursor-pointer whitespace-nowrap min-w-[64px]"
+        // className
       )}
       role="status"
       aria-label={config.label}
     >
       {displayIcon && (
-        <span className={sizeStyles.icon} aria-hidden="true">
+        <span className={sizeStyles.icon} aria-hidden="true" >
           {displayIcon}
         </span>
       )}
