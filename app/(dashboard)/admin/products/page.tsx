@@ -350,7 +350,7 @@ export default function ProductsPage() {
         <div className="flex space-x-2 justify-center">
           <Button
             size="sm"
-            variant="outline"
+            variant="secondary"
             className='cursor-pointer'
             onClick={() => handleEditProduct(item)}
           >
@@ -518,7 +518,7 @@ export default function ProductsPage() {
           <div className="flex justify-end space-x-3 pt-4">
             <Button
               type="button"
-              variant="outline"
+              variant="secondary"
               onClick={handleCloseModal}
               disabled={submitting}
             >

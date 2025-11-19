@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils/format';
+import React from 'react';
 
 interface Column<T> {
   key: keyof T | string;
@@ -123,6 +124,10 @@ export function Table<T extends Record<string, any>>({
                   ? column.key.split('.').reduce((obj, key) => obj?.[key], item)
                   : item[column.key as keyof T];
 
+                const cellContent = column.render 
+                  ? column.render(item, value)
+                  : (value as React.ReactNode ?? '');
+
                 return (
                   <td
                     key={colIndex}
@@ -134,7 +139,7 @@ export function Table<T extends Record<string, any>>({
                     )}
                     style={{ color: 'var(--color-text)' }}
                   >
-                    {column.render ? column.render(item, value) : value}
+                    {cellContent}
                   </td>
                 );
               })}
