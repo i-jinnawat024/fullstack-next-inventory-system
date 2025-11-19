@@ -18,7 +18,7 @@ interface ThemeProviderProps {
   defaultTheme?: Theme;
 }
 
-export function ThemeProvider({ children, defaultTheme = 'light' }: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme = 'dark' }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
   const [mounted, setMounted] = useState(false);
 
@@ -28,8 +28,8 @@ export function ThemeProvider({ children, defaultTheme = 'light' }: ThemeProvide
     if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
       setThemeState(savedTheme);
     } else {
-      // Set light mode as default (Requirement 11.1)
-      setThemeState('light');
+      // Set dark mode as default
+      setThemeState('dark');
     }
     setMounted(true);
   }, []);

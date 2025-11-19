@@ -1,0 +1,845 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Button Component > should match snapshot for danger button in dark theme 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-sm hover:opacity-90 focus:ring-red-500 h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: var(--color-error);"
+>
+  <span>
+    Danger Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Button Component > should match snapshot for primary button in dark theme 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-sm hover:opacity-90 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: var(--color-primary);"
+>
+  <span>
+    Primary Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Button Component > should match snapshot for secondary button in dark theme 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed border shadow-sm hover:opacity-90 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: var(--color-surface); color: var(--color-text); border-color: var(--color-border);"
+>
+  <span>
+    Secondary Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Button Component > should match snapshot for tertiary button in dark theme 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: transparent; color: var(--color-text);"
+>
+  <span>
+    Tertiary Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Input Component > should match snapshot for basic input in dark theme 1`] = `
+<div
+  class="w-full"
+>
+  <label
+    class="block text-sm font-medium mb-2"
+    for="_r_4_"
+    style="color: var(--color-text);"
+  >
+    Basic Input
+  </label>
+  <input
+    class="w-full px-3 py-2 rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-primary"
+    id="_r_4_"
+    placeholder="Enter text"
+    style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
+  />
+</div>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Input Component > should match snapshot for input with error in dark theme 1`] = `
+<div
+  class="w-full"
+>
+  <label
+    class="block text-sm font-medium mb-2"
+    for="_r_5_"
+    style="color: var(--color-text);"
+  >
+    Error Input
+  </label>
+  <input
+    class="w-full px-3 py-2 rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed border-red-500 focus:ring-red-500"
+    id="_r_5_"
+    style="background-color: var(--color-surface); border-color: var(--color-error); color: var(--color-text);"
+  />
+  <p
+    class="mt-1 text-sm"
+    style="color: var(--color-error);"
+  >
+    This field is required
+  </p>
+</div>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > StatCard Component > should match snapshot for stat card with trend in dark theme 1`] = `
+<div
+  class="p-6 rounded-lg transition-all duration-200 hover:shadow-md"
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+>
+  <div
+    class="flex items-start justify-between mb-3"
+  >
+    <div
+      class="flex items-center justify-center w-12 h-12 rounded-lg"
+      style="background-color: var(--color-primary)15; color: var(--color-primary);"
+    >
+      <span
+        class="text-2xl"
+      >
+        📦
+      </span>
+    </div>
+    <div
+      class="text-right"
+    >
+      <div
+        class="text-3xl font-bold leading-none"
+        style="color: var(--color-primary);"
+      >
+        1,234
+      </div>
+      <div
+        class="flex items-center justify-end gap-1 mt-2 text-sm font-medium"
+        style="color: var(--color-success);"
+      >
+        <span
+          class="text-lg leading-none"
+        >
+          ↑
+        </span>
+        <span>
+          12.5
+          %
+        </span>
+      </div>
+    </div>
+  </div>
+  <h3
+    class="text-sm font-medium"
+    style="color: var(--color-text-secondary);"
+  >
+    Total Items
+  </h3>
+</div>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > StatCard Component > should match snapshot for stat card without trend in dark theme 1`] = `
+<div
+  class="p-6 rounded-lg transition-all duration-200 hover:shadow-md"
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+>
+  <div
+    class="flex items-start justify-between mb-3"
+  >
+    <div
+      class="flex items-center justify-center w-12 h-12 rounded-lg"
+      style="background-color: var(--color-primary)15; color: var(--color-primary);"
+    >
+      <span
+        class="text-2xl"
+      >
+        👥
+      </span>
+    </div>
+    <div
+      class="text-right"
+    >
+      <div
+        class="text-3xl font-bold leading-none"
+        style="color: var(--color-primary);"
+      >
+        789
+      </div>
+    </div>
+  </div>
+  <h3
+    class="text-sm font-medium"
+    style="color: var(--color-text-secondary);"
+  >
+    Total Users
+  </h3>
+</div>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Table Component > should match snapshot for loading table in dark theme 1`] = `
+<div
+  class="rounded-lg border p-8 text-center"
+  style="background-color: var(--color-surface); border-color: var(--color-border);"
+>
+  <div
+    class="flex items-center justify-center space-x-2"
+  >
+    <svg
+      class="animate-spin h-5 w-5"
+      fill="none"
+      style="color: var(--color-primary);"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      />
+      <path
+        class="opacity-75"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      style="color: var(--color-text-secondary);"
+    >
+      กำลังโหลด...
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Visual Regression Tests > Dark Theme Snapshots > Table Component > should match snapshot for table with data in dark theme 1`] = `
+<div
+  class="overflow-x-auto"
+>
+  <table
+    class="w-full"
+  >
+    <thead>
+      <tr
+        class="border-b"
+        style="border-color: var(--color-border);"
+      >
+        <th
+          class="px-4 py-3 text-sm font-medium text-left"
+          style="color: var(--color-text);"
+        >
+          ID
+        </th>
+        <th
+          class="px-4 py-3 text-sm font-medium text-left"
+          style="color: var(--color-text);"
+        >
+          Name
+        </th>
+        <th
+          class="px-4 py-3 text-sm font-medium text-right"
+          style="color: var(--color-text);"
+        >
+          Quantity
+        </th>
+        <th
+          class="px-4 py-3 text-sm font-medium text-left"
+          style="color: var(--color-text);"
+        >
+          Status
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="border-b transition-colors duration-200"
+        style="border-color: var(--color-border); background-color: var(--color-surface);"
+      >
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          1
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Item 1
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-right"
+          style="color: var(--color-text);"
+        >
+          10
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Active
+        </td>
+      </tr>
+      <tr
+        class="border-b transition-colors duration-200"
+        style="border-color: var(--color-border); background-color: var(--color-surface);"
+      >
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          2
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Item 2
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-right"
+          style="color: var(--color-text);"
+        >
+          20
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Inactive
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Button Component > should match snapshot for danger button 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-sm hover:opacity-90 focus:ring-red-500 h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: var(--color-error);"
+>
+  <span>
+    Danger Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Button Component > should match snapshot for disabled button 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-sm hover:opacity-90 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  disabled=""
+  style="background-color: var(--color-primary);"
+>
+  <span>
+    Disabled Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Button Component > should match snapshot for loading button 1`] = `
+<button
+  aria-busy="true"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-sm hover:opacity-90 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  disabled=""
+  style="background-color: var(--color-primary);"
+>
+  <svg
+    aria-hidden="true"
+    class="animate-spin w-4 h-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      class="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      stroke-width="4"
+    />
+    <path
+      class="opacity-75"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      fill="currentColor"
+    />
+  </svg>
+  <span>
+    Loading Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Button Component > should match snapshot for primary button 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-sm hover:opacity-90 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: var(--color-primary);"
+>
+  <span>
+    Primary Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Button Component > should match snapshot for secondary button 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed border shadow-sm hover:opacity-90 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: var(--color-surface); color: var(--color-text); border-color: var(--color-border);"
+>
+  <span>
+    Secondary Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Button Component > should match snapshot for tertiary button 1`] = `
+<button
+  aria-busy="false"
+  class="inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 focus:ring-primary h-11 md:h-10 px-4 text-sm gap-2"
+  style="background-color: transparent; color: var(--color-text);"
+>
+  <span>
+    Tertiary Button
+  </span>
+</button>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Input Component > should match snapshot for basic input 1`] = `
+<div
+  class="w-full"
+>
+  <label
+    class="block text-sm font-medium mb-2"
+    for="_r_0_"
+    style="color: var(--color-text);"
+  >
+    Basic Input
+  </label>
+  <input
+    class="w-full px-3 py-2 rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-primary"
+    id="_r_0_"
+    placeholder="Enter text"
+    style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
+  />
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Input Component > should match snapshot for input with error 1`] = `
+<div
+  class="w-full"
+>
+  <label
+    class="block text-sm font-medium mb-2"
+    for="_r_2_"
+    style="color: var(--color-text);"
+  >
+    Error Input
+  </label>
+  <input
+    class="w-full px-3 py-2 rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed border-red-500 focus:ring-red-500"
+    id="_r_2_"
+    style="background-color: var(--color-surface); border-color: var(--color-error); color: var(--color-text);"
+  />
+  <p
+    class="mt-1 text-sm"
+    style="color: var(--color-error);"
+  >
+    This field is required
+  </p>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Input Component > should match snapshot for input with helper text 1`] = `
+<div
+  class="w-full"
+>
+  <label
+    class="block text-sm font-medium mb-2"
+    for="_r_3_"
+    style="color: var(--color-text);"
+  >
+    Helper Input
+  </label>
+  <input
+    class="w-full px-3 py-2 rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-primary"
+    id="_r_3_"
+    style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
+  />
+  <p
+    class="mt-1 text-sm"
+    style="color: var(--color-text-secondary);"
+  >
+    This is helper text
+  </p>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Input Component > should match snapshot for required input 1`] = `
+<div
+  class="w-full"
+>
+  <label
+    class="block text-sm font-medium mb-2"
+    for="_r_1_"
+    style="color: var(--color-text);"
+  >
+    Required Input
+    <span
+      class="text-red-500 ml-1"
+    >
+      *
+    </span>
+  </label>
+  <input
+    class="w-full px-3 py-2 rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-primary"
+    id="_r_1_"
+    required=""
+    style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
+  />
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > StatCard Component > should match snapshot for loading stat card 1`] = `
+<div
+  class="p-6 rounded-lg"
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+>
+  <div
+    class="flex items-start justify-between mb-3"
+  >
+    <div
+      aria-hidden="true"
+      class="bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse rounded-lg"
+      style="width: 48px; height: 48px;"
+    />
+    <div
+      class="text-right space-y-2"
+    >
+      <div
+        aria-hidden="true"
+        class="bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
+        style="width: 80px; height: 36px;"
+      />
+      <div
+        aria-hidden="true"
+        class="bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
+        style="width: 60px; height: 20px;"
+      />
+    </div>
+  </div>
+  <div
+    aria-hidden="true"
+    class="bg-gray-200 dark:bg-gray-700 rounded animate-pulse"
+    style="width: 120px; height: 16px;"
+  />
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > StatCard Component > should match snapshot for stat card with trend down 1`] = `
+<div
+  class="p-6 rounded-lg transition-all duration-200 hover:shadow-md"
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+>
+  <div
+    class="flex items-start justify-between mb-3"
+  >
+    <div
+      class="flex items-center justify-center w-12 h-12 rounded-lg"
+      style="background-color: var(--color-primary)15; color: var(--color-primary);"
+    >
+      <span
+        class="text-2xl"
+      >
+        ⏳
+      </span>
+    </div>
+    <div
+      class="text-right"
+    >
+      <div
+        class="text-3xl font-bold leading-none"
+        style="color: var(--color-primary);"
+      >
+        56
+      </div>
+      <div
+        class="flex items-center justify-end gap-1 mt-2 text-sm font-medium"
+        style="color: var(--color-error);"
+      >
+        <span
+          class="text-lg leading-none"
+        >
+          ↓
+        </span>
+        <span>
+          8.3
+          %
+        </span>
+      </div>
+    </div>
+  </div>
+  <h3
+    class="text-sm font-medium"
+    style="color: var(--color-text-secondary);"
+  >
+    Pending Orders
+  </h3>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > StatCard Component > should match snapshot for stat card with trend up 1`] = `
+<div
+  class="p-6 rounded-lg transition-all duration-200 hover:shadow-md"
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+>
+  <div
+    class="flex items-start justify-between mb-3"
+  >
+    <div
+      class="flex items-center justify-center w-12 h-12 rounded-lg"
+      style="background-color: var(--color-primary)15; color: var(--color-primary);"
+    >
+      <span
+        class="text-2xl"
+      >
+        📦
+      </span>
+    </div>
+    <div
+      class="text-right"
+    >
+      <div
+        class="text-3xl font-bold leading-none"
+        style="color: var(--color-primary);"
+      >
+        1,234
+      </div>
+      <div
+        class="flex items-center justify-end gap-1 mt-2 text-sm font-medium"
+        style="color: var(--color-success);"
+      >
+        <span
+          class="text-lg leading-none"
+        >
+          ↑
+        </span>
+        <span>
+          12.5
+          %
+        </span>
+      </div>
+    </div>
+  </div>
+  <h3
+    class="text-sm font-medium"
+    style="color: var(--color-text-secondary);"
+  >
+    Total Items
+  </h3>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > StatCard Component > should match snapshot for stat card without trend 1`] = `
+<div
+  class="p-6 rounded-lg transition-all duration-200 hover:shadow-md"
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+>
+  <div
+    class="flex items-start justify-between mb-3"
+  >
+    <div
+      class="flex items-center justify-center w-12 h-12 rounded-lg"
+      style="background-color: var(--color-primary)15; color: var(--color-primary);"
+    >
+      <span
+        class="text-2xl"
+      >
+        👥
+      </span>
+    </div>
+    <div
+      class="text-right"
+    >
+      <div
+        class="text-3xl font-bold leading-none"
+        style="color: var(--color-primary);"
+      >
+        789
+      </div>
+    </div>
+  </div>
+  <h3
+    class="text-sm font-medium"
+    style="color: var(--color-text-secondary);"
+  >
+    Total Users
+  </h3>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Table Component > should match snapshot for empty table 1`] = `
+<div
+  class="rounded-lg border p-8 text-center"
+  style="background-color: var(--color-surface); border-color: var(--color-border);"
+>
+  <p
+    style="color: var(--color-text-secondary);"
+  >
+    No data available
+  </p>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Table Component > should match snapshot for loading table 1`] = `
+<div
+  class="rounded-lg border p-8 text-center"
+  style="background-color: var(--color-surface); border-color: var(--color-border);"
+>
+  <div
+    class="flex items-center justify-center space-x-2"
+  >
+    <svg
+      class="animate-spin h-5 w-5"
+      fill="none"
+      style="color: var(--color-primary);"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      />
+      <path
+        class="opacity-75"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      style="color: var(--color-text-secondary);"
+    >
+      กำลังโหลด...
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Visual Regression Tests > Light Theme Snapshots > Table Component > should match snapshot for table with data 1`] = `
+<div
+  class="overflow-x-auto"
+>
+  <table
+    class="w-full"
+  >
+    <thead>
+      <tr
+        class="border-b"
+        style="border-color: var(--color-border);"
+      >
+        <th
+          class="px-4 py-3 text-sm font-medium text-left"
+          style="color: var(--color-text);"
+        >
+          ID
+        </th>
+        <th
+          class="px-4 py-3 text-sm font-medium text-left"
+          style="color: var(--color-text);"
+        >
+          Name
+        </th>
+        <th
+          class="px-4 py-3 text-sm font-medium text-right"
+          style="color: var(--color-text);"
+        >
+          Quantity
+        </th>
+        <th
+          class="px-4 py-3 text-sm font-medium text-left"
+          style="color: var(--color-text);"
+        >
+          Status
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="border-b transition-colors duration-200"
+        style="border-color: var(--color-border); background-color: var(--color-surface);"
+      >
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          1
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Item 1
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-right"
+          style="color: var(--color-text);"
+        >
+          10
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Active
+        </td>
+      </tr>
+      <tr
+        class="border-b transition-colors duration-200"
+        style="border-color: var(--color-border); background-color: var(--color-surface);"
+      >
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          2
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Item 2
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-right"
+          style="color: var(--color-text);"
+        >
+          20
+        </td>
+        <td
+          class="px-4 py-3 text-sm text-left"
+          style="color: var(--color-text);"
+        >
+          Inactive
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

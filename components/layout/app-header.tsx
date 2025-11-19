@@ -173,7 +173,7 @@ export function AppHeader({ onMenuToggle, showBreadcrumbs = true }: AppHeaderPro
         {/* Right Side Actions */}
         <div className="flex items-center gap-2 ml-auto">
           {/* Theme Toggle Button (Requirement 11.2) - Enhanced touch target */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2 rounded-md transition-colors duration-200 hover:opacity-80"
             style={{ 
@@ -203,7 +203,7 @@ export function AppHeader({ onMenuToggle, showBreadcrumbs = true }: AppHeaderPro
                 />
               </svg>
             )}
-          </button>
+          </button> */}
 
           {/* User Menu Dropdown - Enhanced touch target */}
           {!loading && user && (
