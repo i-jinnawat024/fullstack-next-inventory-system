@@ -58,6 +58,17 @@ export interface StockAdjustment {
   createdAt: Date;
 }
 
+export interface AuditTrail {
+  id: string;
+  entityType: 'requisition' | 'inventory' | 'user';
+  entityId: string;
+  action: 'create' | 'update' | 'delete' | 'approve' | 'reject' | 'issue';
+  changes: Record<string, any>;
+  performedBy: string;
+  performedAt: Date;
+  metadata?: Record<string, any>;
+}
+
 export interface Notice {
   id: string;
   title: string;
@@ -102,10 +113,16 @@ export interface AuthUser {
   department: string;
 }
 
+export type TokenType = 'access' | 'refresh';
+
 export interface JWTPayload {
   userId: string;
   email: string;
+  name: string;
+  department: string;
   role: 'user' | 'admin';
+  tokenType: TokenType;
+  sessionId: string;
   iat: number;
   exp: number;
 }

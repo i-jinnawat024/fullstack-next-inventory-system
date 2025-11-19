@@ -81,7 +81,7 @@ export function validateThaiDate(dateStr: string): ValidationResult {
   
   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
   if (!dateRegex.test(dateStr)) {
-    return { isValid: false, message: 'รูปแบบวันที่ไม่ถูกต้อง (DD/MM/YYYY)' };
+    return { isValid: false, message: THAI_LABELS.invalidDateFormat };
   }
   
   const parts = dateStr.split('/');
@@ -90,7 +90,18 @@ export function validateThaiDate(dateStr: string): ValidationResult {
   const year = parseInt(parts[2], 10);
   
   if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900) {
-    return { isValid: false, message: 'วันที่ไม่ถูกต้อง' };
+    return { isValid: false, message: THAI_LABELS.invalidDate };
+  }
+  
+  return { isValid: true };
+}
+
+/**
+ * Validate minimum items selected
+ */
+export function validateMinimumItems(items: any[]): ValidationResult {
+  if (!items || items.length === 0) {
+    return { isValid: false, message: THAI_LABELS.selectAtLeastOneItem };
   }
   
   return { isValid: true };

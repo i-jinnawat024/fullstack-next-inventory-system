@@ -1,6 +1,13 @@
 // Utility functions for formatting data in Thai locale
 
 /**
+ * Merge class names conditionally
+ */
+export function cn(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(' ');
+}
+
+/**
  * Format date to Thai format (DD/MM/YYYY)
  */
 export function formatDate(date: Date | string): string {
