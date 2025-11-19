@@ -69,8 +69,11 @@ export default function LoginPage() {
       const result: ApiResponse<AuthUser> = await response.json();
       
       if (result.success) {
-        // Redirect to dashboard
-        router.push('/dashboard');
+        // Use hard redirect to ensure cookies are set before navigation
+        // This is especially important in production where secure cookies are used
+        // Using replace() instead of href to avoid adding to browser history
+        // Cookies are set in the response headers, so they'll be available on redirect
+        window.location.replace('/dashboard');
       } else {
         setGeneralError(result.error?.message || THAI_LABELS.loginError);
       }
